@@ -2,6 +2,7 @@ const items = document.getElementById('items');
 const templateCard = document.getElementById('template-card').content;
 const fragment = document.createDocumentFragment();
 
+let carrito = [];
 
 document.addEventListener('DOMContentLoaded', ()=>{
   fetchData()  
@@ -39,6 +40,11 @@ const pintarCards = (data) => {
 // agrego al carrito
 const addCarrito = (e) =>{
     if (e.target.classList.contains('btn-dark')) {
-        console.log('Compra mijito');
+        // agregamos la informacion al carrito
     }
+    e.stopPropagation();
+}
+
+const setCarrito = (objeto) => {
+     
 }
