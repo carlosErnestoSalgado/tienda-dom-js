@@ -9,7 +9,11 @@ const fragment = document.createDocumentFragment();
 let carrito = {};
 
 document.addEventListener('DOMContentLoaded', ()=>{
-  fetchData()  
+  fetchData();
+  if(localStorage.getItem('carrito')){
+    carrito = JSON.parse(localStorage.getItem('carrito'));
+    pintarCarrito();
+  }
 })
 
 // Evento click para el div cards
@@ -94,6 +98,8 @@ const pintarCarrito = () =>{
     items.appendChild(fragment);
 
     pintarfooter();
+
+    localStorage.setItem('carrito', JSON.stringify(carrito)); // para guargar los datos en el local storage
 }
 
 const pintarfooter = () => {
