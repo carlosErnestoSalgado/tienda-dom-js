@@ -76,6 +76,7 @@ const setCarrito = (objeto) => {
     // preguntamos si el objeto carrito ya tiene el producto en cuestion
     if (carrito.hasOwnProperty(producto.id)) {
         producto.cantidad = carrito[producto.id].cantidad + 1;
+        producto.precio = producto.cantidad * producto.precio;
     }
 
     carrito[producto.id] = {...producto}; // crea una copia de producto en el objeto carrito
@@ -95,7 +96,7 @@ const pintarCarrito = () =>{
         templateCarrito.querySelectorAll('td')[1].textContent = producto.cantidad;
         templateCarrito.querySelector('.btn-info').dataset.id = producto.id;
         templateCarrito.querySelector('.btn-danger').dataset.id = producto.id;
-        templateCarrito.querySelector('span').textContent = producto.cantidad * producto.precio;
+        templateCarrito.querySelector('span').textContent = producto.precio;
         
         // Clonamos el template
         const clone = templateCarrito.cloneNode(true);
@@ -141,8 +142,9 @@ const actCantidad = e =>{
     // INcrementar cantidad
     if(e.target.classList.contains('btn-info')){
         const producto    = carrito[e.target.dataset.id];
+        const originPrecio = producto.precio/producto.cantidad;
         producto.cantidad++;
-        producto.precio   = producto.precio * producto.cantidad;
+        producto.precio   = originPrecio * producto.cantidad;
         
         carrito[e.target.dataset.id] = {...producto};
 
@@ -151,13 +153,14 @@ const actCantidad = e =>{
     }
     if(e.target.classList.contains('btn-danger')){
         const producto    = carrito[e.target.dataset.id];
+        const originPrecio = producto.precio/producto.cantidad;
         producto.cantidad--;
         if (producto.cantidad === 0) {
             console.log('Es cero mijito')
             delete carrito[e.target.dataset.id];
             
         }
-        producto.precio   = producto.precio * producto.cantidad;
+        producto.precio   = originPrecio * producto.cantidad;
         
         // carrito[e.target.dataset.id] = {...producto};
 
