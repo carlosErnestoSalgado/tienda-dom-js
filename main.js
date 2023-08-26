@@ -1,13 +1,18 @@
+// ELementos del HTML
 const cards = document.getElementById('cards');
 const items = document.getElementById('items');
 const footer = document.getElementById('footer');
+// Templates
 const templateCard = document.getElementById('template-card').content;
 const templateFooter = document.getElementById('template-footer').content;
 const templateCarrito = document.getElementById('template-carrito').content;
+// Fragment
 const fragment = document.createDocumentFragment();
 
+// Objeto carrito para almacenar los datos del .json
 let carrito = {};
 
+// Evento para esperar que el documento sea cargado completamente
 document.addEventListener('DOMContentLoaded', ()=>{
   fetchData();
   if(localStorage.getItem('carrito')){
@@ -20,6 +25,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 cards.addEventListener('click', (e) => {
     addCarrito(e); // si hacen algun click en todo el div que contiene los productos
 })
+
 // Evento para la suma y resta de cantidades
 items.addEventListener('click', (e)=>{
     actCantidad(e);
